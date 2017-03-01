@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>Add Record Form</title>
+		<style type="style.css"></style>
+	</head>
+	<body>
+		<h1>Pace Ice Cream Shop</h1>
+		<form method="get">
+			<p>
+				<label for="flavor">flavor:</label>
+				<select name="flavor" id="flavor">
+					<option value="chocolate">chocolate</option>
+					<option value="vanilla">vanilla</option>
+					<option value="strawberry">strawberry</option>
+					<option value="mint chocolate chip">mint chocolate chip</option>
+					<option value="cotton candy">connot candy</option>
+				</select>
+			</p>
+			<p>
+				<label for="scoops">scoops:</label>
+				<input type="number" min="1" max="3" name="scoops" id="scoops">
+			</p>
+			<input type="submit" value="Submit" onclick="addtoDB()">
+		</form>
+		<a href="http://localhost:8888/MidtermProject/select.php">Show sales</a>
+			<script>
+				function addtoDB() {
+				  var xhttp; 
+				  xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+				    if (xhttp.readyState == 4 && xhttp.status == 200) {
+				        document.getElementById("submitted").innerHTML = "form submitted";
+				    }
+				  };
+				   var flavor = document.getElementById('flavor').value;
+				   var scoops = document.getElementById('scoops').value;
+				   
+				   var queryString = "?flavor=" + flavor + "&scoops=" + scoops;
+				   console.log(queryString);
+				   xhttp.open("GET", "insert.php" + queryString, true);
+				   xhttp.send(null); 
+				}
+			</script>
+ 	</body>
+</html>
